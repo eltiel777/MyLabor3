@@ -81,11 +81,11 @@ public class Matrix{
             System.out.println();
         }
     }
-    public int[][] getMatrix() {
+    public int[][] getMatrix() { //возвращает текущее значение поля
         return data;
     }
 
-    public void setMatrix(int[][] matrix) {
+    public void setMatrix(int[][] matrix) { //изменяет текущее значение поля
         this.data = matrix;
     }
 

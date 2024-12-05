@@ -1,50 +1,12 @@
 import java.util.Scanner;
 public class Menu {
 
-    private static Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in); //сканер у нас один на весь класс, чтоб не создавать новые объекты и тд
 
     public Menu() {
         this.scanner = new Scanner(System.in); //поле сканер инициализируется объектом сканер. связанным с потоком ввода с клавиатуры
     }
 
-    public static void inputMatrixFromConsole(Matrix matrix) {
-        try {
-            System.out.println("Введите размеры матрицы (строки и столбцы):");
-            int rows = scanner.nextInt();
-            int cols = scanner.nextInt();
-
-            if (rows <= 0 || cols <= 0) {
-                System.out.println("Размеры матрицы должны быть положительными числами.");
-                return;
-            }
-
-            matrix.setMatrix(new int[rows][cols]);  // Устанавливаем матрицу в объект
-
-            System.out.println("Введите элементы матрицы (строка за строкой):");
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < cols; j++) {
-                    if (scanner.hasNextInt()) {
-                        matrix.getMatrix()[i][j] = scanner.nextInt(); // Устанавливаем элемент в матрицу
-                    } else {
-                        System.out.println("Ошибка ввода: ожидалось целое число.");
-                        scanner.next();
-                        j--;
-                    }
-                }
-            }
-
-            System.out.println("Введенная матрица:");
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < cols; j++) {
-                    System.out.print(matrix.getMatrix()[i][j] + " ");
-                }
-                System.out.println();
-            }
-        } catch (Exception e) {
-            System.out.println("Произошла ошибка при вводе данных: " + e.getMessage());
-            scanner.nextLine();
-        }
-    }
     //Метод вызова меню
     public static void showMenu() {
         int choice;
@@ -103,7 +65,7 @@ public class Menu {
             switch (choice) {
                 case 1:
                     System.out.println("Ввод матрицы из консоли:");
-                    inputMatrixFromConsole(matrix); // передаем matrix в метод
+                    inputMatrixFromConsole(matrix); //передаем matrix в метод
                     System.out.println("Исходная матрица:");
                     matrix.printMatrix();
                     isDataEntered = true;
@@ -112,10 +74,10 @@ public class Menu {
                     System.out.println("Ввод матрицы из бинарного файла:");
                     System.out.print("Введите имя файла: ");
                     String inputFile = scanner.next();
-                    matrix = FileWork.inputMatrixFromFile(inputFile); // Использование метода из класса FileWork
-                    // Если загрузить матрицу не удалось, выводим сообщение и возвращаемся в меню
+                    matrix = FileWork.inputMatrixFromFile(inputFile); //получаем матрицу из файла
+                    //если матрицы нет, то
                     if (matrix == null) {
-                        System.out.println("Ошибка при загрузке матрицы. Возвращаемся в меню...");
+                        System.out.println("Ошибка при загрузке матрицы. Возвращаемся в меню.");
                         break; // Возвращаемся в меню
                     }
                     System.out.println("Исходная матрица:");
@@ -134,7 +96,7 @@ public class Menu {
                         System.out.println("Сохранение в бинарный файл:");
                         System.out.print("Введите имя файла: ");
                         String binaryFile = scanner.next();
-                        FileWork.saveMatrixToBinaryFile(matrix, binaryFile); // Использование метода из класса FileWork
+                        FileWork.saveMatrixToBinaryFile(matrix, binaryFile); //сохраняем в бинарный файл
                     } else {
                         System.out.println("Сначала введите данные матрицы.");
                     }
@@ -144,7 +106,7 @@ public class Menu {
                         System.out.println("Сохранение в текстовый файл:");
                         System.out.print("Введите имя файла: ");
                         String textFile = scanner.next();
-                        FileWork.saveMatrixToTextFile(matrix, textFile); // Использование метода из класса FileWork
+                        FileWork.saveMatrixToTextFile(matrix, textFile); //сохраняем в текстовый
                     } else {
                         System.out.println("Сначала введите данные матрицы.");
                     }
@@ -188,10 +150,9 @@ public class Menu {
                     System.out.println("Ввод матрицы из бинарного файла:");
                     System.out.print("Введите имя файла: ");
                     String inputFile = scanner.next();
-                    matrix = FileWork.inputMatrixFromFile(inputFile); // Использование метода из класса FileWork
-                    // Если загрузить матрицу не удалось, выводим сообщение и возвращаемся в меню
+                    matrix = FileWork.inputMatrixFromFile(inputFile);
                     if (matrix == null) {
-                        System.out.println("Ошибка при загрузке матрицы. Возвращаемся в меню...");
+                        System.out.println("Ошибка при загрузке матрицы. Возвращаемся в меню.");
                         return; // Возвращаемся в меню
                     }
                     System.out.println("Исходная матрица:");
@@ -210,7 +171,7 @@ public class Menu {
                         System.out.println("Сохранение в бинарный файл:");
                         System.out.print("Введите имя файла: ");
                         String binaryFile = scanner.next();
-                        FileWork.saveMatrixToBinaryFile(matrix, binaryFile); // Использование метода из класса FileWork
+                        FileWork.saveMatrixToBinaryFile(matrix, binaryFile);
                     } else {
                         System.out.println("Сначала введите данные матрицы.");
                     }
@@ -220,7 +181,7 @@ public class Menu {
                         System.out.println("Сохранение в текстовый файл:");
                         System.out.print("Введите имя файла: ");
                         String textFile = scanner.next();
-                        FileWork.saveMatrixToTextFile(matrix, textFile); // Использование метода из класса FileWork
+                        FileWork.saveMatrixToTextFile(matrix, textFile);
                     } else {
                         System.out.println("Сначала введите данные матрицы.");
                     }
@@ -264,11 +225,10 @@ public class Menu {
                     System.out.println("Ввод матрицы из бинарного файла:");
                     System.out.print("Введите имя файла: ");
                     String inputFile = scanner.next();
-                    matrix = FileWork.inputMatrixFromFile(inputFile); // Использование метода из класса FileWork
-                    // Если загрузить матрицу не удалось, выводим сообщение и возвращаемся в меню
+                    matrix = FileWork.inputMatrixFromFile(inputFile);
                     if (matrix == null) {
-                        System.out.println("Ошибка при загрузке матрицы. Возвращаемся в меню...");
-                        return; // Возвращаемся в меню
+                        System.out.println("Ошибка при загрузке матрицы. Возвращаемся в меню.");
+                        return;
                     }
                     System.out.println("Исходная матрица:");
                     matrix.printMatrix();
@@ -290,7 +250,7 @@ public class Menu {
                         System.out.println("Сохранение в бинарный файл:");
                         System.out.print("Введите имя файла: ");
                         String binaryFile = scanner.next();
-                        FileWork.saveMatrixToBinaryFile(matrix, binaryFile); // Использование метода из класса FileWork
+                        FileWork.saveMatrixToBinaryFile(matrix, binaryFile);
                     } else {
                         System.out.println("Сначала введите данные матрицы.");
                     }
@@ -300,7 +260,7 @@ public class Menu {
                         System.out.println("Сохранение в текстовый файл:");
                         System.out.print("Введите имя файла: ");
                         String textFile = scanner.next();
-                        FileWork.saveMatrixToTextFile(matrix, textFile); // Использование метода из класса FileWork
+                        FileWork.saveMatrixToTextFile(matrix, textFile);
                     } else {
                         System.out.println("Сначала введите данные матрицы.");
                     }
@@ -317,8 +277,8 @@ public class Menu {
     private static void taskD() {
         Scanner scanner = new Scanner(System.in);
         FileWork fileWork = new FileWork();
-        String sentence = ""; // Для хранения введенного предложения
-        boolean isDataEntered = false; // Флаг для проверки ввода данных
+        String sentence = ""; //для хранения введенного предложения
+        boolean isDataEntered = false; //флаг для проверки ввода данных
         int choice;
 
         do {
@@ -332,7 +292,7 @@ public class Menu {
             System.out.print("Ваш выбор: ");
 
             choice = scanner.nextInt();
-            scanner.nextLine(); // Очистка буфера
+            scanner.nextLine(); //очистка буфера
 
             switch (choice) {
                 case 1:
@@ -340,37 +300,37 @@ public class Menu {
                     String sentenceInput;
                     do {
                         System.out.print("Введите предложение (только буквы, без чисел и символов): ");
-                        sentenceInput = scanner.nextLine().trim();  // Считываем строку и удаляем лишние пробелы
+                        sentenceInput = scanner.nextLine().trim();  //считываем строку и удаляем лишние пробелы
 
-                        // Проверка на пустое предложение
+                        //проверка на пустое предложение
                         if (sentenceInput.isEmpty()) {
                             System.out.println("Ошибка, предложение не может быть пустым");
                         }
 
                         // Проверка на наличие цифр или символов
-                        else if (!sentenceInput.matches("[a-zA-Zа-яА-ЯёЁ ]+")) { // Проверяем соответствует ли шаблону
+                        else if (!sentenceInput.matches("[a-zA-Zа-яА-ЯёЁ ]+")) { //проверяем соответствует ли шаблону
                             System.out.println("Ошибка, предложение может содержать только буквы и пробелы");
                         }
 
                     } while (sentenceInput.isEmpty() || !sentenceInput.matches("[a-zA-Zа-яА-ЯёЁ ]+"));
 
-                    sentence = sentenceInput;  // Записываем корректное предложение
-                    isDataEntered = true; // Помечаем флаг
-                    break; // Закончили ввод
+                    sentence = sentenceInput;  //записываем корректное предложение
+                    isDataEntered = true; //помечаем флаг
+                    break; //закончили ввод
 
                 case 2:
                     System.out.println("Введите имя файла для чтения:");
                     String readFileName = scanner.nextLine();
 
-                    // Проверка расширения файла
+                    //Проверка расширения файла
                     if (!readFileName.endsWith(".txt")) {
                         System.out.println("Ошибка, файл должен иметь расширение .txt");
                         break;
                     }
 
-                    // Чтение текста из файла
-                    fileWork.readTextFromFile(readFileName); // Чтение текста из файла
-                    sentence = fileWork.getText(); // Получаем текст из объекта FileWork
+                    //Чтение текста из файла
+                    fileWork.readTextFromFile(readFileName); //Чтение текста из файла
+                    sentence = fileWork.getText(); //Получаем текст из объекта FileWork
                     System.out.println(sentence);
                     isDataEntered = true;
                     break;
@@ -384,7 +344,7 @@ public class Menu {
                             lengths[i] = words[i].length(); // Заполняем массив длинами слов
                         }
 
-                        // Находим индексы самого длинного и самого короткого слов
+                        //Находим индексы самого длинного и самого короткого слов
                         int minLengthIndex = 0, maxLengthIndex = 0;
                         for (int i = 1; i < words.length; i++) {
                             if (lengths[i] < lengths[minLengthIndex]) {
@@ -395,8 +355,11 @@ public class Menu {
                             }
                         }
 
-                        // Находим количество слов между самым длинным и самым коротким
+                        //Находим количество слов между самым длинным и самым коротким
                         int result = Math.abs(maxLengthIndex - minLengthIndex) - 1;
+                        if (result<0){
+                            result=0;
+                        }
 
                         System.out.println("Предложение: " + sentence);
                         System.out.println("Результат (кол-во слов между): " + result);
@@ -410,12 +373,12 @@ public class Menu {
                         System.out.println("Введите имя файла для записи:");
                         String writeFileName = scanner.nextLine();
 
-                        // Проверка, добавление расширения .txt, если его нет
+                        //Проверка, добавление расширения .txt, если его нет
                         if (!writeFileName.endsWith(".txt")) {
                             writeFileName += ".txt";
                         }
 
-                        // Записываем предложение в файл
+                        //Записываем предложение в файл
                         fileWork.writeTextToFile(writeFileName, sentence);
                     } else {
                         System.out.println("Сначала введите текст.");
@@ -430,6 +393,44 @@ public class Menu {
                     System.out.println("Неверный выбор. Попробуйте снова.");
             }
         } while (choice != 5);
+    }
+    public static void inputMatrixFromConsole(Matrix matrix) {
+        try {
+            System.out.println("Введите размеры матрицы (строки и столбцы):");
+            int rows = scanner.nextInt();
+            int cols = scanner.nextInt();
+
+            if (rows <= 0 || cols <= 0) {
+                System.out.println("Размеры матрицы должны быть положительными числами.");
+                return;
+            }
+
+            matrix.setMatrix(new int[rows][cols]);  //cоздаем объект с матрицей
+
+            System.out.println("Введите элементы матрицы (строка за строкой):");
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    if (scanner.hasNextInt()) {
+                        matrix.getMatrix()[i][j] = scanner.nextInt(); //доб элемент в матрицу
+                    } else {
+                        System.out.println("Ошибка ввода: ожидалось целое число.");
+                        scanner.next();
+                        j--;
+                    }
+                }
+            }
+
+            System.out.println("Введенная матрица:");
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    System.out.print(matrix.getMatrix()[i][j] + " ");
+                }
+                System.out.println();
+            }
+        } catch (Exception e) {
+            System.out.println("Произошла ошибка при вводе данных: " + e.getMessage());
+            scanner.nextLine();
+        }
     }
 
 
