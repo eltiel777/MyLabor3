@@ -31,10 +31,10 @@ public class FileWork {
     }
 
     public static Matrix inputMatrixFromFile(String fileName) {
-        // Проверяем, что файл имеет расширение ".bin"
+        //проверяем, что файл имеет расширение ".bin"
         if (!fileName.toLowerCase().endsWith(".bin")) {
             System.out.println("Ошибка: файл должен быть бинарным (расширение .bin).");
-            return null; // Возвращаем null, чтобы сигнализировать об ошибке
+            return null; //возвращаем null, чтобы сказать об ошибке
         }
 
         Matrix matrix = null;
@@ -63,7 +63,7 @@ public class FileWork {
             //чтение и проверка элементов матрицы
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
-                    if (dis.available() < Integer.BYTES) { //если данных меньше, чем нужно
+                    if (dis.available() < Integer.BYTES) { //константа равна 4 байта, если данных меньше, чем нужно для чтения целого числа
                         System.out.println("Ошибка, недостаточно данных для матрицы");
                         return null; //если данных недостаточно, возвращаем null
                     }
@@ -71,9 +71,9 @@ public class FileWork {
                 }
             }
 
-        } catch (IOException e) {
+        } catch (IOException e) { //ловит ошибки ввода вывода
             System.out.println("Ошибка при чтении файла: " + e.getMessage());
-        } catch (Exception e) {
+        } catch (Exception e) { //ловит остальные
             System.out.println("Ошибка при обработке данных: " + e.getMessage());
         }
 
@@ -102,7 +102,7 @@ public class FileWork {
         }
     }
 
-    private String text;  // Поле для хранения текста
+    private String text;  //поле для хранения текста
 
     //метод чтения текста из файла
     public void readTextFromFile(String fileName) {
@@ -114,10 +114,6 @@ public class FileWork {
 
         //проверка на существование файла
         File file = new File(fileName); //создаем объект класса файл, для работы с файлом
-        if (!file.exists()) { //проверяет, существует ли он
-            System.out.println("Ошибка, файл не существует");
-            return;
-        }
 
         //проверка существования и пустоты файла
         if (!file.exists()) {
@@ -146,7 +142,7 @@ public class FileWork {
 
     //метод записи текста с результатом в файл
     public void writeTextToFile(String fileName, String result) {
-        // Проверка пустое ли имя
+        //проверка пустое ли имя
         if (fileName == null || fileName.isEmpty()) {
             System.out.println("Ошибка, имя файла не может быть пустым");
             return;
@@ -165,7 +161,7 @@ public class FileWork {
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
-            writer.write(result); // Записываем результат
+            writer.write(result); //записываем результат
             System.out.println("Результат записан в файл");
         } catch (IOException e) {
             System.out.println("Ошибка при записи в файл: " + e.getMessage());
@@ -173,7 +169,7 @@ public class FileWork {
     }
     //получение текста
     public String getText() {
-        return this.text; //
+        return this.text;
     }
 
 

@@ -3,10 +3,6 @@ public class Menu {
 
     private static Scanner scanner = new Scanner(System.in); //сканер у нас один на весь класс, чтоб не создавать новые объекты и тд
 
-    public Menu() {
-        this.scanner = new Scanner(System.in); //поле сканер инициализируется объектом сканер. связанным с потоком ввода с клавиатуры
-    }
-
     //Метод вызова меню
     public static void showMenu() {
         int choice;
@@ -78,7 +74,7 @@ public class Menu {
                     //если матрицы нет, то
                     if (matrix == null) {
                         System.out.println("Ошибка при загрузке матрицы. Возвращаемся в меню.");
-                        break; // Возвращаемся в меню
+                        break; //возвращаемся в меню
                     }
                     System.out.println("Исходная матрица:");
                     matrix.printMatrix();
@@ -328,9 +324,9 @@ public class Menu {
                         break;
                     }
 
-                    //Чтение текста из файла
-                    fileWork.readTextFromFile(readFileName); //Чтение текста из файла
-                    sentence = fileWork.getText(); //Получаем текст из объекта FileWork
+                    //чтение текста из файла
+                    fileWork.readTextFromFile(readFileName); //чтение текста из файла
+                    sentence = fileWork.getText();
                     System.out.println(sentence);
                     isDataEntered = true;
                     break;
@@ -344,7 +340,7 @@ public class Menu {
                             lengths[i] = words[i].length(); // Заполняем массив длинами слов
                         }
 
-                        //Находим индексы самого длинного и самого короткого слов
+                        //находим индексы самого длинного и самого короткого слов
                         int minLengthIndex = 0, maxLengthIndex = 0;
                         for (int i = 1; i < words.length; i++) {
                             if (lengths[i] < lengths[minLengthIndex]) {
@@ -355,7 +351,7 @@ public class Menu {
                             }
                         }
 
-                        //Находим количество слов между самым длинным и самым коротким
+                        //находим количество слов между самым длинным и самым коротким
                         int result = Math.abs(maxLengthIndex - minLengthIndex) - 1;
                         if (result<0){
                             result=0;
@@ -378,7 +374,7 @@ public class Menu {
                             writeFileName += ".txt";
                         }
 
-                        //Записываем предложение в файл
+                        //записываем предложение в файл
                         fileWork.writeTextToFile(writeFileName, sentence);
                     } else {
                         System.out.println("Сначала введите текст.");
@@ -429,7 +425,7 @@ public class Menu {
             }
         } catch (Exception e) {
             System.out.println("Произошла ошибка при вводе данных: " + e.getMessage());
-            scanner.nextLine();
+            scanner.nextLine(); //очищаем остатки ввода в буфере сканера
         }
     }
 
